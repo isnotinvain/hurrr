@@ -10,6 +10,7 @@ def constructTriangleFromLine(pt1, pt2):
   pt4 = (pt1[0] - halfHeightVector[0], pt1[1] + halfHeightVector[1])
   return (pt2, pt3, pt4)
 
+# TODO: did I write this or is this from somebody else? I don't remember. Investigate that.
 def polyArea(vertices):
     '''
     return: the area of the polygon described by vertices
