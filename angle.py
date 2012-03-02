@@ -27,14 +27,14 @@ def normalizePositiveAngle(angle):
   return n
 
 def shortestTurn(current, desired):
-    '''
-    return: the least number of radians (+ or -) needed
-    to get from current angle to desired angle (ie is it faster
-    to turn left or turn right?)
-    '''
-    delta = desired - current
-    if delta > PI:
-        delta = -TWO_PI + delta
-    elif delta < -PI:
-        delta = TWO_PI + delta
-    return delta
+  '''
+  return: the least number of radians (+ or -) needed
+  to get from current angle to desired angle (ie is it faster
+  to turn left or turn right?)
+  '''
+  delta = desired - current
+  if delta > PI:
+    delta = -TWO_PI + delta
+  elif delta < -PI:
+    delta = TWO_PI + delta
+  return delta
