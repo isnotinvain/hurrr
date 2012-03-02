@@ -100,6 +100,48 @@ def angleBetweenPts(pt1, pt2):
   ycomp = pt1[1] - pt2[1]
   return math.atan2(ycomp, xcomp)
 
+def ceilRect(size, maxSize, returnFactor=False):
+  """
+  @return a rectangle scaled to fit inside maxSize while preserving aspect ratio
+  if returnFactor is True return the scaling factor and the new rectangle
+  """
+
+  width, height = size
+  maxWidth, maxHeight = maxSize
+  if (maxWidth, maxHeight) == (0, 0) or (width, height) == (0, 0): return (0, 0)
+  wfactor, hfactor = 1.0, 1.0
+
+  if width > maxWidth: wfactor = float(maxWidth) / width
+  if height > maxHeight: hfactor = float(maxHeight) / height
+
+  factor = min(wfactor, hfactor)
+
+  size = (width * factor, height * factor)
+
+  if not returnFactor:
+    return size
+  else:
+    return size, factor
+
+def rectContainsRect(rect1, rect2):
+  """
+  return: whether rect1 contains rect2
+  """
+  x1, y1, w1, h1 = rect1
+  x2, y2, w2, h2 = rect2
+
+  if x2 >= x1 and y2 >= y1 and x2 <= x1 + w1 and y2 <= y1 + h1 and x2 + w2 <= x1 + w1 and y2 + h2 <= y1 + h1:
+    return True
+  return False
+
+def rectContainsPt(pt, rect):
+  '''
+  return: whether rect contains pt
+  '''
+  px, py = pt
+  rx, ry, w, h = rect
+  return px >= rx and px <= rx + w and py >= ry and py <= ry + h
+
 def constructTriangleFromLine(pt1, pt2):
   '''
   return: a list of points that describe an equilteral triangle around the segment from pt1 --> pt2
@@ -124,10 +166,10 @@ def polyArea(vertices):
   return A / 2.0
 
 # Some polygon magic, thanks to John W. Ratcliff on www.flipcode.com
-# (insideTriangle, polySnip, and decomposePoly): I wrote these a long time ago
+# (triangleContainsPt, polySnip, and decomposePoly): I wrote these a long time ago
 # I don't remember where the algorithms for them came from, but I think it was the flipcode
 # article above
-def insideTriangle(pt,triangle):
+def triangleContainsPt(pt,triangle):
   '''
   return: whether pt is inside triangle
   '''
