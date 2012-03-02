@@ -2,9 +2,11 @@
 hurrr by Alex Levenson
 =================================================================
 
-Fuck licenses.
-
 I wrote most of this code.
+
+Some of this code comes from code I wrote as an intern at One Laptop per Child.
+That code is under a GPL license. I have no idea if I'm aloud to re-use it or not, but I wrote it so I feel OK about it.
+If that's a problem, contact me and we'll work it out.
 
 Some of it was adapted from other code found on stack overflow,
 or written in other languages, or found on blogs, or wikipedia, etc.
