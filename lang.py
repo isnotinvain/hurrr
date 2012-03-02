@@ -6,6 +6,7 @@ Utilities for working with the python language
 Currently just an Enum implementation
 =================================================================
 '''
+import itertools
 
 class Enum(object):
   '''
@@ -29,5 +30,5 @@ class Enum(object):
       raise ValueError("Keyword arguments not supported")
     if len(seq) != len(set(seq)):
       raise ValueError("Duplicate keys in enum:" + str(seq))
-    enums = dict(zip(seq, xrange(len(seq))))
+    enums = dict(itertools.izip(seq, xrange(len(seq))))
     return type('Enum', (cls,), enums)
