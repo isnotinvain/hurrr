@@ -1,4 +1,11 @@
-# hurrr by Alex Levenson
+'''
+==================================================================
+hurrr by Alex Levenson
+
+Utilities for working with angles in radians
+=================================================================
+'''
+
 import math
 
 HALF_PI = math.pi / 2.0
@@ -18,14 +25,6 @@ def normalizePositiveAngle(angle):
   n = normalizeAngle(angle)
   if n < 0: n = TWO_PI - abs(n)
   return n
-
-def betweenPts(pt1, pt2):
-    '''
-    return: the angle between the line segment from pt1 --> pt2 and the x axis, from -pi to pi
-    '''
-    xcomp = pt2[0] - pt1[0]
-    ycomp = pt1[1] - pt2[1]
-    return math.atan2(ycomp, xcomp)
 
 def shortestTurn(current, desired):
     '''

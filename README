@@ -1,4 +1,10 @@
-hurrr
+==================================================================
+hurrr by Alex Levenson
+
 A collection of python utilities and helpers
 
-By Alex Levenson
+Mainly for 2D game development
+
+hurrr assumes a coordinate system in which x increases to the right, and y increases upwards
+just like the cartesian plane from high school math class
+==================================================================

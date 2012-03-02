@@ -1,4 +1,19 @@
-# hurrr by Alex Levenson
+'''
+==================================================================
+hurrr by Alex Levenson
+
+Utilities for vectors of any length
+
+All methods return the same type as the first vector parameter
+This means that the first vector parameter must have a constructor that accepts a generator
+
+All methods that act on more than one vector require that they all be the same length
+
+It is my *untested* theory that these methods are less efficient than the analogous ones
+found in 2d.py (whcih work only on 2-dimensional vectors)
+=================================================================
+'''
+
 import itertools
 import math
 
@@ -50,16 +65,16 @@ def ceil(vec, ceil):
   return vec
 
 def scale(vec, mag):
-    '''
-    return: vec scaled to have magnitude mag
-    return type matches vec
-    vec must have a constructor that accepts a generator
-    '''
-    cmag = magnitude(vec)
-    if cmag == 0:
-      raise ValuError("Cannot scale a vector of zero magnitude")
-    f = float(mag) / cmag
-    return type(vec)(x*f for x in vec)
+  '''
+  return: vec scaled to have magnitude mag
+  return type matches vec
+  vec must have a constructor that accepts a generator
+  '''
+  cmag = magnitude(vec)
+  if cmag == 0:
+    raise ValuError("Cannot scale a vector of zero magnitude")
+  f = float(mag) / cmag
+  return type(vec)(x*f for x in vec)
 
 def magnitude(vec):
   '''

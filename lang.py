@@ -1,4 +1,11 @@
-# hurrr by Alex Levenson
+'''
+==================================================================
+hurrr by Alex Levenson
+
+Utilities for working with the python language
+Currently just an Enum implementation
+=================================================================
+'''
 
 class Enum(object):
   '''
