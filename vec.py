@@ -10,7 +10,7 @@ This means that the first vector parameter must have a constructor that accepts 
 All methods that act on more than one vector require that they all be the same length
 
 It is my *untested* theory that these methods are less efficient than the analogous ones
-found in 2d.py (whcih work only on 2-dimensional vectors)
+found in twod.py (whcih work only on 2-dimensional vectors)
 =================================================================
 '''
 
