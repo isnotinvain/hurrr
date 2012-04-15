@@ -43,8 +43,8 @@ class Camera(object):
       y = self.screenHeight - y
     return x,y
 
-  def scalarToScreen(scalar):
+  def scalarToScreen(self, scalar):
     return scalar * self.screenToWorldRatio * self.zoom
 
-  def scalarToWorld(scalar):
+  def scalarToWorld(self, scalar):
     return scalar / (self.screenToWorldRatio * self.zoom)

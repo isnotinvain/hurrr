@@ -50,10 +50,10 @@ class Window(object):
     pygame.init()
     pygame.display.init()
     if not self.size:
-      size = pygame.display.list_modes()[0]
-      size = map(lambda x : int(x * 0.75), size)
-    self.screen = pygame.display.set_mode(size)
-    self.camera = Camera(screenToWorldRatio, True, self.size[1])
+      self.size = pygame.display.list_modes()[0]
+      self.size = map(lambda x : int(x * 0.75), self.size)
+    self.screen = pygame.display.set_mode(self.size)
+    self.camera = Camera(self.screenToWorldRatio, True, self.size[1])
     pygame.font_instance = pygame.font.Font(None, 20)
     self.clock = pygame.time.Clock()
 
