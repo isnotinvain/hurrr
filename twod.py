@@ -15,6 +15,8 @@ found in vec.py (whcih work on n-dimensional vectors)
 import math
 import angle
 
+sqrt2 = math.sqrt(2.0)
+
 def add(vec1, vec2):
   """
   returns the elementwise sum of vec1 and vec2
@@ -33,6 +35,36 @@ def distance2(pt1, pt2):
   faster than distance above, use for comparisons
   '''
   return ((pt1[0] - pt2[0]) ** 2 + (pt1[1] - pt2[1]) ** 2)
+
+def manhattanDistance(pt1, pt2, blockSize, roundFunc=math.floor):
+   '''
+   return: the distance between pt1 and pt2 using the manhattan method
+           (distance along a grid, think walking along city blocks)
+           blockSize: is the length of a block (blocks treated as squares)
+           roundFunc: default math.floor (ignore partial blocks), use math.ceil
+                      to count partial blocks
+   '''
+   x1,y1 = pt1
+   x2,y2 = pt2
+   xdist = roundFunc(float(abs(x1-x2)) / blockSize)
+   ydist = roundFunc(float(abs(y1-y2)) / blockSize)
+   return int((xdist + ydist) * blockSize)
+
+def chessBoardDistance(pt1, pt2, blockSize, roundFunc=math.floor):
+  '''
+  return: the distance between pt1 and pt2 using the chessBoard method
+          (distance along a grid, diagonal movement allowed, think the King in chess)
+          blockSize: is the length of a block (blocks treated as squares)
+          roundFunc: default math.floor (ignore partial blocks), use math.ceil
+                     to count partial blocks
+  '''
+  x1,y1 = pt1
+  x2,y2 = pt2
+  xdist = roundFunc(float(abs(x1-x2)) / blockSize)
+  ydist = roundFunc(float(abs(y1-y2)) / blockSize)
+  diag = min(xdist, ydist)
+  straight = (xdist + ydist)
+  return (sqrt2*blockSize) * diag + blockSize * (straight - 2*diag)
 
 def midPt(pt1, pt2):
   '''
