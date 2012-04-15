@@ -23,7 +23,7 @@ class PhysicsSimulator(object):
     lower, upper = dimensions
     worldAABB.lowerBound.Set(*lower)
     worldAABB.upperBound.Set(*upper)
-    self.world = box2d.b2World(worldAABB, gravity, doSleep=True)
+    self.world = box2d.b2World(worldAABB, gravity, True) #doSleep=True
 
     self.velocityIterations = velocityIterations
     self.positionIterations = positionIterations
