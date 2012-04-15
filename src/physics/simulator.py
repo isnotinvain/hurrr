@@ -12,12 +12,16 @@ Can't seem to find the Elements project online though, so I don't know how to pr
 import Box2D as box2d
 from .. import lang
 
-class PhysicsSimulator(object):
+class Simulator(object):
   """
   Encapsulates the Box2D simulation and
   provides useful physics related functions
   """
-  def __init__(self, dimensions=((0,0),(100,100)), gravity=(0,0), velocityIterations=20, positionIterations=20, timeStep=1.0/60):
+  def __init__(self, dimensions=((0,0),(100,100)), \
+                     gravity=(0,0), \
+                     velocityIterations=20, \
+                     positionIterations=20, \
+                     timeStep=1.0/60):
     # set up box2D
     worldAABB = box2d.b2AABB()
     lower, upper = dimensions

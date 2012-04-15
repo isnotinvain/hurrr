@@ -1,1 +1,1 @@
-import window
+from window import Window

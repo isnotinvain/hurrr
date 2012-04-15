@@ -1,2 +1,2 @@
-import simulator
-import util
+from simulator import Simulator
+from util import *

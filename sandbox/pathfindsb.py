@@ -1,4 +1,4 @@
-from ..pathfind import *
+from hurrr.pathfind import *
 
 rows = []
 for x in xrange(50):
