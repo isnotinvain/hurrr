@@ -29,6 +29,8 @@ class Simulator(object):
     worldAABB.upperBound.Set(*upper)
     self.world = box2d.b2World(worldAABB, gravity, True) #doSleep=True
 
+    self.dimensions = dimensions
+    self.gravity = gravity
     self.velocityIterations = velocityIterations
     self.positionIterations = positionIterations
     self.timeStep = timeStep
