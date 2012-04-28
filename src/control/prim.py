@@ -23,7 +23,7 @@ def torqueToRotate(radians, momentInertia, currentVelocity, time):
   torqueNeeded = momentInertia * accelerationNeeded
   return torqueNeeded
 
-def torqueToSetAngularVelocity(currentVelocity, targetVelocity, momentInertia, time):
+def torqueToSetVelocity(currentVelocity, targetVelocity, momentInertia, time):
   '''
   return the torque needed to set the angular velocity of a
          (potentially) already rotating body
@@ -63,7 +63,7 @@ def forceToSetVelocity(currentVelocity, targetVelocity, mass, time):
 class PIDController(object):
   '''
   Calculates the force / torque / voltage / power level
-  needed to controll a body using Proportional–Integral–Derivative Control
+  needed to controll a body using Proportional-Integral-Derivative Control
   and maintains the state needed to do so
   '''
   def __init__(self, kp, kd, ki, kiDamp):
@@ -93,10 +93,10 @@ class PIDController(object):
     return the force / torque / voltage / power level to apply
     '''
     error = self.calcError(current, desired)
-    derivative = (error - self.previousError) / deltaT
+    derivative = (error - self.previousError)
     self.previousError = error
-    self.integral += self.kiDamp * (error / deltaT)
-    return kp * error + kd * derivative + di * self.integral
+    self.integral += self.kiDamp * error
+    return self.kp * error + self.kd * derivative + self.ki * self.integral
 
   def reset(self):
     '''
@@ -109,6 +109,18 @@ class PIDController(object):
     '''
     self.previousError = 0.0
     self.integral = 0.0
+
+class TwodPIDController(object):
+  def __init__(self, pidx, pidy):
+    self.pidx = pidx
+    self.pidy = pidy
+
+  def update(self, current, desired, deltaT):
+    return self.pidx.update(current[0], desired[0], deltaT), self.pidy.update(current[1], desired[1], deltaT)
+
+  def reset(self):
+    self.pidx.reset()
+    self.pidy.reset()
 
 class RotationalPIDController(PIDController):
   '''

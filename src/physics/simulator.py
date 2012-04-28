@@ -41,7 +41,7 @@ class Simulator(object):
     '''
     self.world.Step(self.timeStep, self.velocityIterations, self.positionIterations)
 
-  def addBody(self, pos, parent=None, sleepFlag=True, isBullet=False, linearDamping=0.1, angularDamping=0.1):
+  def addBody(self, pos, parent=None, sleepFlag=True, isBullet=False, linearDamping=0.01, angularDamping=0.01):
     '''
     Add a body to the simulation at pos
     Optionaly set parent in order to get from this body -> the game object it represents
