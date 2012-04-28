@@ -108,12 +108,24 @@ def magnitude2(vec):
   '''
   return vec[0]**2 + vec[1]**2
 
-def movePt(pt, angle, distance):
+def ints(vec):
+  '''
+  maps int() over all elements of vec
+  '''
+  return (int(vec[0]), int(vec[1]))
+
+def floats(vec):
+  '''
+  maps float() over all elements of vec
+  '''
+  return (float(vec[0]), float(vec[1]))
+
+def movePt(pt, ang, distance):
   '''
   move a point by a ray
   return: a new point that has been moved
   '''
-  cAngle = angle.normalizeAngle(angle)
+  cAngle = angle.normalizeAngle(ang)
   delta = scale((-math.sin(cAngle), math.cos(cAngle)), distance)
   return add(pt, delta)
 

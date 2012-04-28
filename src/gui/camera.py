@@ -32,15 +32,17 @@ class Camera(object):
       raise ValueError("You must provide a screenHeight if the screen is inverted")
 
   def toScreen(self, pt):
-    x,y = self.scalarToScreen(pt[0]), self.scalarToScreen(pt[1])
+    x,y = pt
+    x,y = self.scalarToScreen(x), self.scalarToScreen(y)
     if self.screenIsInverted:
       y = self.screenHeight - y
     return x,y
 
   def toWorld(self, pt):
-    x,y = self.scalarToWorld(pt[0]), self.scalarToWorld(pt[1])
+    x,y = pt
     if self.screenIsInverted:
       y = self.screenHeight - y
+    x,y = self.scalarToWorld(x), self.scalarToWorld(y)
     return x,y
 
   def scalarToScreen(self, scalar):

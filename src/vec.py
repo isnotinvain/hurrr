@@ -88,6 +88,18 @@ def magnitude2(vec):
   '''
   return sum(x**2 for x in vec)
 
+def ints(vec):
+  '''
+  maps int() over all elements of vec
+  '''
+  return type(vec)(int(x) for x in vec)
+
+def floats(vec):
+  '''
+  maps float() over all elements of vec
+  '''
+  return type(vec)(float(x) for x in vec)
+
 def __assertVecSameLength(vec1, vec2):
   if not len(vec1) == len(vec2):
     raise Exception("Vectors not of the smame length")
