@@ -18,6 +18,11 @@ class Enum(object):
     if currentState == verbs.HURPING:
       print "hurping!"
 
+    OR
+
+    colors = Enum.new(RED=(255, 0, 0), GREEN=(0,255,0), BLUE=(0, 0, 255))
+    color = colors.RED
+
   This is based on an answer to a stack overflow question written by:
   http://stackoverflow.com/users/7980/alec-thomas
 
@@ -26,9 +31,15 @@ class Enum(object):
 
   @classmethod
   def new(cls, *seq, **named):
-    if len(named) > 0:
-      raise ValueError("Keyword arguments not supported")
-    if len(seq) != len(set(seq)):
-      raise ValueError("Duplicate keys in enum:" + str(seq))
-    enums = dict(itertools.izip(seq, xrange(len(seq))))
-    return type('Enum', (cls,), enums)
+    if seq and named:
+      raise ValueError("Must supply either sequence or named, not both!")
+    if not seq and not named:
+      raise ValueError("Must supply either sequence or named!")
+    if seq:
+      if len(seq) != len(set(seq)):
+        raise ValueError("Duplicate keys in enum:" + str(seq))
+      named = dict(itertools.izip(seq, xrange(len(seq))))
+    else:
+      if len(named) != len(set(named.itervalues())):
+        raise ValueError("Duplicate values in enum:" + str(named))
+    return type('Enum', (cls,), named)
