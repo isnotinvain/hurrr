@@ -3,10 +3,28 @@
 hurrr by Alex Levenson
 
 Utilities for working with the python language
-Currently just an Enum implementation
 =================================================================
 '''
 import itertools
+
+def isIterable(item):
+  '''
+  return wether item is iterable
+  '''
+  try:
+    iter(item)
+  except TypeError:
+    return False
+  return True
+
+def ensureIterable(item, message="Must be iterable"):
+  '''
+  raises a TypeError if item is not iterable (with optional message)
+  '''
+  try:
+    iter(item)
+  except TypeError:
+    raise TypeError(message)
 
 class Enum(object):
   '''

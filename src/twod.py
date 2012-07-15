@@ -186,6 +186,16 @@ def rectContainsPt(pt, rect):
   rx, ry, w, h = rect
   return px >= rx and px <= rx + w and py >= ry and py <= ry + h
 
+def normalizeRect(pt1, pt2):
+  '''
+  return the rectange formed by pt1 and pt2 as (leftBottom, topRight)
+  '''
+  lx = min(pt1[0], pt2[0])
+  ly = min(pt1[1], pt2[1])
+  ux = max(pt1[0], pt2[0])
+  uy = max(pt1[1], pt2[1])
+  return ((lx,ly), (ux,uy))
+
 def constructTriangleFromLine(pt1, pt2):
   '''
   return: a list of points that describe an equilteral triangle around the segment from pt1 --> pt2
