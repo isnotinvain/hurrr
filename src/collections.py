@@ -183,3 +183,6 @@ class TwoDIndex(object):
       else:
         return self.getValuesInSquare(key.start, key.stop, prune)
     raise TypeError("Can only be accessed via [center:distance], [center:distance:prune], [pt:pt], or [pt:pt:prune]")
+
+  def __iter__(self):
+    return self.points.itervalues()

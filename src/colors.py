@@ -5,7 +5,7 @@ hurrr by Alex Levenson
 Some color constants
 =================================================================
 '''
-from .. import lang.Enum
+import lang.Enum
 
 # standard color scheme
 STANDARD = lang.Enum( \

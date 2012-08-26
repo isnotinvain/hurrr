@@ -129,6 +129,12 @@ def movePt(pt, ang, distance):
   delta = scale((-math.sin(cAngle), math.cos(cAngle)), distance)
   return add(pt, delta)
 
+def getRay(pt1, pt2):
+  '''
+  return the distance and angle between pt1 and pt2
+  '''
+  return (distance(pt1, pt2), angleBetweenPts(pt1, pt2))
+
 def slope(pt1, pt2):
   '''
   return: the slope between pt1 and pt2 or inf for vertical lines

@@ -37,14 +37,11 @@ def bodiesAtPoint(world, pt, includeStatic=False, includeSensor=False, maxBodies
 
 def bodiesInRegion(world, region, maxBodies=1000):
   '''
-  Find up to maxBodies located in a region
+  Find up to maxBodies located in a region: (leftBottom, rightTop)
   '''
-  left, top = region[0]
-  right, bottom = region[1]
-
   aabb = box2d.b2AABB()
-  aabb.lowerBound.Set(left, bottom)
-  aabb.upperBound.Set(right, top)
+  aabb.lowerBound.Set(region[0])
+  aabb.upperBound.Set(region[1])
   count, shapes = world.Query(aabb, maxBodies)
   bodies = set()
   for shape in shapes:
