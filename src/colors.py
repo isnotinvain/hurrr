@@ -5,10 +5,10 @@ hurrr by Alex Levenson
 Some color constants
 =================================================================
 '''
-import lang.Enum
+import lang
 
 # standard color scheme
-STANDARD = lang.Enum( \
+STANDARD = lang.Enum.new( \
   WHITE=(255, 255, 255), \
   BLACK=(0, 0, 0), \
   RED=(255, 0, 0), \
@@ -21,7 +21,7 @@ STANDARD = lang.Enum( \
 )
 
 # LCARS color scheme
-LCARS = lang.Enum( \
+LCARS = lang.Enum.new( \
   WHITE=(255, 255, 255), \
   BLACK=(0, 0, 0), \
   RED=(204, 102, 102), \

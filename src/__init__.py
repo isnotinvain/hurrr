@@ -1,5 +1,6 @@
 import angle
 import collections
+import colors
 import control
 import fs
 import lang
