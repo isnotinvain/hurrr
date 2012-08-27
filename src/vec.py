@@ -27,6 +27,19 @@ def add(vec1, vec2):
   __assertVecSameLength(vec1, vec2)
   return type(vec1)(p[0] + p[1] for p in itertools.izip(vec1,vec2))
 
+def sub(vec1, vec2):
+  """
+  returns the elementwise subtraction of vec1 minus vec2
+  vec1 and vec2 must be the same length
+  return type matches vec1
+  vec1 must have a constructor that accepts a generator
+  """
+  __assertVecSameLength(vec1, vec2)
+  return type(vec1)(p[0] - p[1] for p in itertools.izip(vec1,vec2))
+
+def mul(vec, scalar):
+  return type(vec)(x * scalar for x in vec)
+
 def distance(vec1, vec2):
   '''
   return: the distance between vec1 and vec2

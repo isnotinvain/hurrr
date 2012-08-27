@@ -6,9 +6,10 @@ Utilities for 2D math (points, lines, polygons, etc)
 
 All methods return scalars or tuples
 All methods work on indexable objects of length 2 or scalars where appropriate
+All methods do not mutate original parameters
 
 It is my *untested* theory that these methods are more efficient than the analogous ones
-found in vec.py (whcih work on n-dimensional vectors)
+found in vec.py (which work on n-dimensional vectors)
 =================================================================
 '''
 
@@ -22,6 +23,15 @@ def add(vec1, vec2):
   returns the elementwise sum of vec1 and vec2
   """
   return (vec1[0] + vec2[0], vec1[1] + vec2[1])
+
+def sub(vec1, vec2):
+  """
+  returns the elementwise subtraction of vec1 minus vec2
+  """
+  return (vec1[0] - vec2[0], vec1[1] - vec2[1])
+
+def mul(vec, scalar):
+  return vec[0] * scalar, vec[1] * scalar
 
 def distance(pt1, pt2):
   '''

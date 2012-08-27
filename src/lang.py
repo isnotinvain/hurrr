@@ -21,10 +21,7 @@ def ensureIterable(item, message="Must be iterable"):
   '''
   raises a TypeError if item is not iterable (with optional message)
   '''
-  try:
-    iter(item)
-  except TypeError:
-    raise TypeError(message)
+  if not isIterable(item): raise TypeError(message)
 
 class Enum(object):
   '''

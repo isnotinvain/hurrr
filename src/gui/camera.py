@@ -10,6 +10,8 @@ A 2D camera abstraction that handles:
 This is essentially the glue between rendering an simulation
 =================================================================
 '''
+import hurrr
+
 class Camera(object):
   '''
   A 2D camera abstraction that handles:
@@ -17,7 +19,7 @@ class Camera(object):
     * Positional Offset
     * Zoom
   '''
-  def __init__(self, screenToWorldRatio, screenIsInverted, screeHeight):
+  def __init__(self, screenToWorldRatio, screenIsInverted, screenSize, pos):
     '''
     screenToWorldRatio: how many screen units per world unit
                         in the case of pygame and box2d
@@ -25,28 +27,25 @@ class Camera(object):
     '''
     self.screenToWorldRatio = screenToWorldRatio
     self.screenIsInverted = screenIsInverted
-    self.screenHeight = screeHeight
-    self.zoom = 1.0
-    self.pos = (0,0)
-    if self.screenIsInverted and not self.screenHeight:
-      raise ValueError("You must provide a screenHeight if the screen is inverted")
+    self.screenSize = screenSize
+    self.pos = (0, 0)
 
   def toScreen(self, pt):
-    x,y = pt
+    x,y = hurrr.twod.sub(pt, self.pos)
     x,y = self.scalarToScreen(x), self.scalarToScreen(y)
     if self.screenIsInverted:
-      y = self.screenHeight - y
+      y = self.screenSize[1] - y
     return x,y
 
   def toWorld(self, pt):
     x,y = pt
     if self.screenIsInverted:
-      y = self.screenHeight - y
+      y = self.screenSize[1] - y
     x,y = self.scalarToWorld(x), self.scalarToWorld(y)
-    return x,y
+    return hurrr.twod.add(pt, self.pos)
 
   def scalarToScreen(self, scalar):
-    return scalar * self.screenToWorldRatio * self.zoom
+    return scalar * self.screenToWorldRatio
 
   def scalarToWorld(self, scalar):
-    return scalar / (self.screenToWorldRatio * self.zoom)
+    return scalar / self.screenToWorldRatio
