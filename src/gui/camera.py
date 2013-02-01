@@ -42,7 +42,7 @@ class Camera(object):
     if self.screenIsInverted:
       y = self.screenSize[1] - y
     x,y = self.scalarToWorld(x), self.scalarToWorld(y)
-    return hurrr.twod.add(pt, self.pos)
+    return hurrr.twod.add((x,y), self.pos)
 
   def scalarToScreen(self, scalar):
     return scalar * self.screenToWorldRatio
