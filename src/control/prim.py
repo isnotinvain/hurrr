@@ -62,11 +62,11 @@ def forceToSetVelocity(currentVelocity, targetVelocity, mass, time):
 
 class PIDController(object):
   '''
-  Calculates the force / torque / voltage / power level
+  Calculates the control signal (force / torque / voltage / power level etc.)
   needed to controll a body using Proportional-Integral-Derivative Control
-  and maintains the state needed to do so
+  and maintains the internal state needed to do so
   '''
-  def __init__(self, kp, kd, ki, kiDamp):
+  def __init__(self, kp=1.0, ki=1.0, kd=1.0, kiDamp=1.0):
     '''
     kp: proportional control modifier
     kd: derivative control modifier
@@ -88,15 +88,16 @@ class PIDController(object):
     '''
     return desired - current
 
-  def update(self, current, desired, deltaT):
+  def getControlSignal(self, current, desired):
     '''
-    return the force / torque / voltage / power level to apply
+    return the control signal to apply
     '''
     error = self.calcError(current, desired)
     derivative = (error - self.previousError)
     self.previousError = error
-    self.integral += self.kiDamp * error
-    return self.kp * error + self.kd * derivative + self.ki * self.integral
+    self.integral += error
+    self.integral *= self.kiDamp
+    return (self.kp * error) + (self.kd * derivative) + (self.ki * self.integral)
 
   def reset(self):
     '''
@@ -110,13 +111,13 @@ class PIDController(object):
     self.previousError = 0.0
     self.integral = 0.0
 
-class TwodPIDController(object):
-  def __init__(self, pidx, pidy):
-    self.pidx = pidx
-    self.pidy = pidy
+class TwodPIDController(PIDController):
+  def __init__(self, kp=1.0, ki=1.0, kd=1.0, kiDamp=1.0):
+    self.pidx = PIDController(kp, ki, kd, kiDamp)
+    self.pidy = PIDController(kp, ki, kd, kiDamp)
 
-  def update(self, current, desired, deltaT):
-    return self.pidx.update(current[0], desired[0], deltaT), self.pidy.update(current[1], desired[1], deltaT)
+  def getControlSignal(self, current, desired):
+    return self.pidx.getControlSignal(current[0], desired[0]), self.pidy.getControlSignal(current[1], desired[1])
 
   def reset(self):
     self.pidx.reset()
